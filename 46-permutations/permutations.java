@@ -1,25 +1,25 @@
 class Solution {
-    public static void solve(List<List<Integer>> res,List<Integer> ans,boolean flag[],int arr[]) {
-        if(ans.size() == arr.length) {
+    public static void solve(List<List<Integer>> res,List<Integer> ans,boolean flag[],int nums[],int size,int idx) {
+        if(ans.size() == size) {
             res.add(new ArrayList<>(ans));
             return;
         }
 
-        for(int i = 0;i < arr.length;i++) {
+        for(int i = 0;i < size;i++) {
             if(flag[i]) continue;
+            ans.add(nums[i]);
             flag[i] = true;
-            ans.add(arr[i]);
-            solve(res,ans,flag,arr);
-            flag[i] = false;
+            solve(res,ans,flag,nums,size,idx+1);
             ans.remove(ans.size()-1);
-           
+            flag[i] = false;
+            
         }
     }
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
         List<Integer> ans = new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
         boolean flag[] = new boolean[nums.length];
-        solve(res,ans,flag,nums);
+        solve(res,ans,flag,nums,nums.length,0);
         return res;
     }
 }
