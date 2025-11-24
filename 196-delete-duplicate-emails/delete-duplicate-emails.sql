@@ -1,15 +1,5 @@
 # Write your MySQL query statement below
-
-with cte as (
-    select
-        id,
-        email,
-        row_number() over(partition by email order by id) as row_num
-    from
-        Person
-)
-
-delete from Person
-where id in (
-    select id  from cte where row_num > 1
-)
+delete p2
+from Person p1 join Person p2
+where p1.email = p2.email and
+p1.id < p2.id
