@@ -12,10 +12,12 @@ class Solution {
         for(int i = n-2;i >= 0;i--) {
             right[i] = Math.max(right[i+1],height[i]);
         }
-        int waterCount = 0;
+
+        int waterCap = 0;
         for(int i = 0;i < n;i++) {
-            waterCount += Math.min(left[i],right[i])-height[i];
+            int minHei = Math.min(left[i],right[i]);
+            waterCap += minHei-height[i];
         }
-        return waterCount;
+        return waterCap;
     }
 }
