@@ -6,16 +6,17 @@ class Solution {
         while (right < s.length()) {
             char ch = s.charAt(right);
             map.put(ch, map.getOrDefault(ch, 0) + 1);
-            if (map.containsKey(ch) && map.get(ch) > 1) {
+
+            if (map.get(ch) > 1) {
                 while (map.get(ch) > 1) {
                     char c = s.charAt(left);
                     map.put(c, map.get(c) - 1);
                     left++;
                 }
             }
-            right++;
             max = Math.max(max, right - left + 1);
+            right++;
         }
-        return max-1;
+        return max;
     }
 }
